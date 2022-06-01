@@ -212,16 +212,11 @@
 				</tr>';
 			}
 			}else if(ISSET($_POST['mm'])){
-				$query=mysqli_query($conn, "CREATE TABLE temp (Temperatura FLOAT,Humedad float,fecha_actual TIMESTAMP(6));");
-				$query=mysqli_query($conn,"CREATE TABLE ma (maxTemperatura FLOAT,maxHumedad float,fecha_actual TIMESTAMP(6));");
-				$query=mysqli_query($conn,"CREATE TABLE mi (minTemperatura FLOAT,minHumedad float,fecha_actual TIMESTAMP(6));");
-				$query=mysqli_query($conn, "INSERT INTO temp (Temperatura, Humedad, fecha_actual) SELECT Temperatura, Humedad, fecha_actual FROM `Tb_DHT11`;");
-				$query=mysqli_query($conn,"INSERT INTO ma (fecha_actual, maxTemperatura, maxHumedad)SELECT LEFT((fecha_actual),10) AS Fecha, MAX(Temperatura), MAX(Humedad) FROM temp GROUP BY Fecha;");
-				$query=mysqli_query($conn,'UPDATE temp SET Temperatura = "999", Humedad = "999" WHERE Temperatura =  "0";');
-				$query=mysqli_query($conn,'INSERT INTO mi (fecha_actual, minTemperatura, minHumedad) SELECT LEFT((fecha_actual),10) AS Fecha, MIN(Temperatura), MIN(Humedad) FROM temp GROUP BY Fecha;');
-				$query=mysqli_query($conn,'CREATE TABLE mmth(maxTemperatura FLOAT,maxHumedad float,minTemperatura FLOAT,minHumedad float,fecha_actual TIMESTAMP(6));');
-				$query=mysqli_query($conn,'INSERT INTO mmth (fecha_actual, minTemperatura, minHumedad,maxTemperatura,maxHumedad) SELECT mi.fecha_actual, mi.minTemperatura, mi.minHumedad,ma.maxTemperatura,ma.maxHumedad FROM mi,ma WHERE mi.fecha_actual=ma.fecha_actual GROUP BY fecha_actual;');
-				$query=mysqli_query($conn,'SELECT LEFT((fecha_actual),10) AS Fecha, maxTemperatura as tMaxima, minTemperatura as tminima, maxHumedad as hMaxima, minHumedad as hminima FROM mmth;');
+				$query=mysqli_query($conn,"CREATE TABLE temp (Temperatura FLOAT,Humedad float,fecha_actual TIMESTAMP(6));");
+				$query=mysqli_query($conn,"CREATE TABLE ma (maxTemperatura FLOAT,prtemp float,prhum float,maxHumedad float,minTemperatura FLOAT,minHumedad float,fecha_actual TIMESTAMP(6));");
+				$query=mysqli_query($conn,"INSERT INTO temp (Temperatura, Humedad, fecha_actual) SELECT CAST(Temperatura as FLOAT),CAST(Humedad as FLOAT), fecha_actual FROM `tb_dth11` WHERE Temperatura != 'nan';");
+				$query=mysqli_query($conn,"INSERT INTO ma (fecha_actual, maxTemperatura, maxHumedad,prtemp,prhum,minTemperatura, minHumedad)SELECT LEFT((fecha_actual),10) AS Fecha, MAX(Temperatura), MAX(Humedad),avg(Temperatura),avg(Humedad),MIN(Temperatura), MIN(Humedad) FROM temp GROUP BY Fecha;");
+				$query=mysqli_query($conn,'SELECT LEFT((fecha_actual),10) AS Fecha, maxTemperatura as tMaxima, minTemperatura as tminima, round((prtemp),1) as prtemp,round((prhum),1) as prhum,maxHumedad as hMaxima, minHumedad as hminima FROM ma;');
 				while($fetch=mysqli_fetch_array($query)){
 					echo '<tr>';
 					echo '<td>';
