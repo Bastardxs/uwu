@@ -244,7 +244,7 @@
 					}
 					echo '</tr>';
 				}
-				$query=mysqli_query($conn,'DROP TABLE temp,ma,mi,mmth;');
+				$query=mysqli_query($conn,'DROP TABLE temp,ma;');
 		}else{
 			$query=mysqli_query($conn, "SELECT id, Temperatura, Humedad, LEFT((fecha_actual),10) AS Fecha, SUBSTRING((fecha_actual),12,8) as Hora from `tb_dht11`;") or die(mysqli_error());
 			while($fetch=mysqli_fetch_array($query)){
