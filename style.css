@@ -1,0 +1,98 @@
+h1{
+    font-size: 18px;
+}
+
+h2{
+    font-size: 14px;
+}
+
+h3{
+    font-size: 12px;
+}
+
+#contenedor{
+    position: absolute;
+    top:300px;
+    left:30px;
+    margin: 0  auto;
+    display: flex;
+    flex-direction: row;
+    width: 335px;
+    height: 220px;
+    background: linear-gradient(#2676ac,#0a507f,#00194e);
+    color: rgb(239, 239, 239);
+    border-radius: 10px;
+    padding: 0%;
+    line-height:50%;
+}
+
+#icono-clima{
+    width: 164px;
+    height: 164px;
+    margin-top: 8%;
+}
+
+#box_2{
+    display: flex;
+    flex-direction: column;
+}
+
+#Temperatura-Valor{
+    font-size: 40px;
+    margin: 0%;
+    margin-top: 12px;
+    text-align: center;
+    margin-bottom: 3px;
+    
+}
+
+#Temperatura-Descripcion{
+    font-size: 18px;
+    margin: 0%;
+    text-align: center;
+    font-family:monospace;
+    margin-bottom: 0px;
+    font-weight: bold;
+}
+
+
+#item-humedad{
+    display: flex;
+    flex-direction: row;
+    margin: 0%;
+    height: 16px;
+    font-size: 14px;
+    margin-top: 0%;
+    padding-top: 0%;
+    justify-content: center;
+}
+
+#label-Humedad, #Humedad{
+    margin-top: 0%;
+    font-family: 'Nunito', sans-serif;
+    font-weight: lighter;
+}
+
+#Humedad{
+    margin-bottom: 0%;
+}
+
+#Ubicacion{
+    font-size: 18px;
+    margin: 0%;
+    margin-top: 16px;
+    font-family: 'Inder', sans-serif;
+}
+
+#fecha-hora{
+    display: flex;
+    flex-direction: row;
+    font-size: 10px;
+}
+#fecha-hora{
+    margin: 0%;
+    padding: 0%;
+    font-family: 'Nunito', sans-serif;
+    font-weight: lighter;
+
+}
